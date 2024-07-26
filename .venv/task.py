@@ -9,14 +9,15 @@ class Task:
         self.task_frame = ttk.Frame(master=master)
         self.task_label = ttk.Label(master=self.task_frame, text=text, font=font)
         self.task_check_box = ttk.Checkbutton(master=self.task_frame, command=self.check_task)
+        self.task_check_box.configure(bootstyle="light")
         # unchecking button by default
         self.task_check_box.state(['!alternate'])
         self.task_status : bool = status
 
-    def pack(self, padx=0, pady=0) -> None:
+    def pack(self, padx=0, pady=0, side="left") -> None:
         self.task_check_box.pack(side="left")
         self.task_label.pack(side="left")
-        self.task_frame.pack(side="left", padx=padx, pady=pady)
+        self.task_frame.pack(side=side, padx=padx, pady=pady)
 
     # TODO: function implementation
     def check_task(self) -> None:
