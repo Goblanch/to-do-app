@@ -14,17 +14,26 @@ class Task:
         self.task_check_box.state(['!alternate'])
         self.task_status : bool = status
 
-    def pack(self, padx=0, pady=0, side="left") -> None:
+        if self.task_status:
+            self.set_task_label_checked()
+            self.task_check_box.state(['selected'])
+
+        self.task_title : str = text
+
+    def pack(self, padx=0, pady=0) -> None:
         self.task_check_box.pack(side="left")
         self.task_label.pack(side="left")
-        self.task_frame.pack(side=side, padx=padx, pady=pady)
+        self.task_frame.pack(side="top", fill="both")
 
-    # TODO: function implementation
+
     def check_task(self) -> None:
         self.task_status = not self.task_status
         if(self.task_status):
-            strikethrough_font = tkFont.Font(family="Calibri", size=18, overstrike=1)
-            self.task_label.configure(font=strikethrough_font)
+            self.set_task_label_checked()
         else:
             normal_font = tkFont.Font(family="Calibri", size=18, overstrike=0)
             self.task_label.configure(font=normal_font)
+
+    def set_task_label_checked(self):
+        strikethrough_font = tkFont.Font(family="Calibri", size=18, overstrike=1)
+        self.task_label.configure(font=strikethrough_font)
